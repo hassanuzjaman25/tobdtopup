@@ -26,7 +26,7 @@ COPY . /var/www/html/
 
 # Laravel install (core folder)
 WORKDIR /var/www/html/core
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # Permissions
 RUN chown -R www-data:www-data /var/www/html
