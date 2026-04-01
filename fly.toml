@@ -1,4 +1,6 @@
-app = "topup"
+app = "topup"   # 👉 এখানে তোমার app name (unique হলে ভালো)
+
+primary_region = "sin"   # 👉 Bangladesh এর জন্য best (Singapore)
 
 [build]
 
@@ -7,3 +9,14 @@ app = "topup"
   force_https = true
   auto_stop_machines = false
   auto_start_machines = true
+  min_machines_running = 1
+
+  [http_service.concurrency]
+    type = "connections"
+    soft_limit = 20
+    hard_limit = 25
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 256
