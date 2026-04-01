@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class AutoVoucher extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'variation_id',
+        'order_id',
+        'transaction_id',
+        'code',
+        'status',
+    ];
+
+    protected $casts = [
+        'status' => 'boolean',
+        'code' => 'array',
+    ];
+
+    public function variation(): BelongsTo
+    {
+        return $this->belongsTo(Variation::class);
+    }
+
+    // public function product()
+    // {
+    //     return $this->hasOneThrough(Product::class, Variation::class, 'id', 'id', 'variation_id', 'product_id');
+    // }
+}

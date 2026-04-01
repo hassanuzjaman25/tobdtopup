@@ -1,0 +1,3 @@
+[29-Oct-2025 16:12:44 Asia/Dhaka] PHP Fatal error:  Cannot use int as default value for property App\Filament\Pages\Settings::$navigationSort of type ?string in /home/tanvirto/public_html/core/app/Filament/Pages/Settings.php on line 26
+[29-Oct-2025 16:13:03 Asia/Dhaka] PHP Fatal error:  Cannot use int as default value for property App\Filament\Pages\Settings::$navigationSort of type ?string in /home/tanvirto/public_html/core/app/Filament/Pages/Settings.php on line 26
+[29-Oct-2025 16:14:03 Asia/Dhaka] PHP Fatal error:  Cannot use int as default value for property App\Filament\Pages\Settings::$navigationSort of type ?string in /home/tanvirto/public_html/core/app/Filament/Pages/Settings.php on line 26

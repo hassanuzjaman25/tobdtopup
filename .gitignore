@@ -1,0 +1,6 @@
+/core/vendor
+/core/node_modules
+/core/.env
+/storage
+*.log
+*.zip
