@@ -1,30 +1,37 @@
 FROM php:8.1-apache
 
+# Enable rewrite
 RUN a2enmod rewrite
 
-# packages
+# Install system packages + PHP extensions
 RUN apt-get update && apt-get install -y \
     unzip git curl libzip-dev zip \
-    && docker-php-ext-install zip
+    libicu-dev \
+    && docker-php-ext-install zip intl exif
 
-# composer install
+# Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# ionCube
+# Install ionCube Loader
 RUN curl -fsSL https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz | tar -xz \
     && cp ioncube/ioncube_loader_lin_8.1.so /usr/local/lib/php/extensions/ \
     && echo "zend_extension=/usr/local/lib/php/extensions/ioncube_loader_lin_8.1.so" > /usr/local/etc/php/conf.d/00-ioncube.ini
 
-# Apache port 8080
+# Change Apache port to 8080 (IMPORTANT for Fly.io)
 RUN sed -i 's/80/8080/g' /etc/apache2/ports.conf
 RUN sed -i 's/:80/:8080/g' /etc/apache2/sites-available/000-default.conf
 
-# copy project
+# Copy project files
 COPY . /var/www/html/
 
-# 🔥 Laravel install
+# Laravel install (core folder)
 WORKDIR /var/www/html/core
 RUN composer install --no-dev --optimize-autoloader
 
-# permission
+# Permissions
 RUN chown -R www-data:www-data /var/www/html
+
+# Expose port
+EXPOSE 8080
+
+CMD ["apache2-foreground"]
